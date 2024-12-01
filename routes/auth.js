@@ -10,6 +10,10 @@ const router = express.Router();
 // This is our user registration
 router.post("/register", registerUser);
 
+// Attach the middleware to posts 
+const protect = require("../middleware/authMiddleware")
+router.post("/create", protect, createPost);
+
 // This is our user login
 router.post("/login", loginUser)
 
