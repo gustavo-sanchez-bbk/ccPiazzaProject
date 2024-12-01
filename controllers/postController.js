@@ -32,4 +32,4 @@ const getPosts = async (req, res) => {
 	}
 };
 
-module.exports = {createPost, getPosts }
+module.exports = {createPost, getPosts}

@@ -7,7 +7,7 @@ const express = require("express");
 const {check,validationResult} = require("express-validator");
 
 // We must still create the authController.js script under controllers folder otherwise this will fail
-const { registerUser, loginUser } = require("../controllers/authController");
+const {registerUser, loginUser} = require("../controllers/authController");
 const router = express.Router();
 
 // Validation rules for registering
