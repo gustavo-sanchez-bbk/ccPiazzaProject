@@ -7,11 +7,17 @@ const connectDB = require("./config/db");
 // Connect the authentication routes 
 const authRoutes = require("./routes/auth")
 
+
+
 dotenv.config();
 connectDB();
 
+// Use this to parse JSON 
 const app = express();
 app.use(express.json());
+
+// Route our paths here 
+app.use("/api/auth", authRoutes);
 
 // For some reason my Mac does not like port 3000 so I can switch here to 5000 if required, or run Bash Script killProcess3000
 

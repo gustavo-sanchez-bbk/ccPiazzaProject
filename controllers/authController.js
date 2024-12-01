@@ -41,7 +41,7 @@ const loginUser = async(req,res) => {
 		
 		const isMatch = await user.matchPassword(password);
 		if (!isMatch) {
-			return res.status(400).jsopn({message:"Sorry, Invalid Credentials or user does not Exist"})
+			return res.status(400).json({message:"Sorry, Invalid Credentials or user does not Exist"})
 		}
 		
 		res.status(200).json({
@@ -59,7 +59,11 @@ const loginUser = async(req,res) => {
 // Function to generate our Token 
 
 const generateToken = (id) => {
-	return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1hopur"});
+	// Added error handling 
+	if (!process.env.JWT_SECRET){
+		throw new Error("JWT_SECRET is not defined!")
+	}
+	return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1h"});
 }; 
 
 module.exports = {registerUser, loginUser}; 
