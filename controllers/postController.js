@@ -20,3 +20,16 @@ const createPost = async (req,res) => {
 		res.status(500).json({message: error.message});
 	}
 }; 
+
+// Get ALL the posts 
+const getPosts = async (req, res) => {
+	try {
+		// Only posts posted by the logged in user 
+		const posts = await Post.find({user: req.user.id}); 
+		res.json(posts);
+	} catch (error) {
+		res.status(500).json({message: error.message});
+	}
+};
+
+module.exports = {createPost, getPosts }
