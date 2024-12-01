@@ -36,12 +36,12 @@ const loginUser = async(req,res) => {
 	try {
 		const user = await User.findOne({email});
 		if (!user) {
-			return res.status(400).json({message:"Sorry, Invalid Credentials or user does not exist"});
+			return res.status(400).json({message:"Sorry, Invalid Username"});
 		}
 		
 		const isMatch = await user.matchPassword(password);
 		if (!isMatch) {
-			return res.status(400).json({message:"Sorry, Invalid Credentials or user does not Exist"})
+			return res.status(400).json({message:"Sorry, Invalid Password"})
 		}
 		
 		res.status(200).json({
