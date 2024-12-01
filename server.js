@@ -4,6 +4,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
+// Connect the authentication routes 
+const authRoutes = require("./routes/auth")
+
 dotenv.config();
 connectDB();
 

@@ -1,6 +1,6 @@
 // This is our AuthController 
 
-const User = require("..models/User"); 
+const User = require("../models/User"); 
 const jwt = require("jsonwebtoken"); 
 
 // Register a new user 
@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
 		res.status(201).json({
 			id: user._id,
 			username: user.username,
-			email: user.email
+			email: user.email,
 			token: generateToken(user._id),
 			
 		});
@@ -59,7 +59,7 @@ const loginUser = async(req,res) => {
 // Function to generate our Token 
 
 const generateToken = (id) => {
-	return jwt.sign({id}), process.env.JWT_SECRET, {expiresIn: "1hopur"});
+	return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1hopur"});
 }; 
 
 module.exports = {registerUser, loginUser}; 
