@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
 			topics,
 			body,
 			expirationTime,
-			owner: req.user.id, // Associated with the authenticated user
+			owner: req.user, // Associated with the authenticated user
 		});
 		
 		res.status(201).json(post);
