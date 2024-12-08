@@ -55,6 +55,10 @@ const interactWithPost = async (req, res) => {
 		} else {
 			return res.status(400).json({ message: "Invalid interaction type" });
 		}
+		// You cant like your own post you sad person
+		if (req.user.id === post.owner.toString() && interactionType === "like") {
+			return res.status(400).json({ message: "You cannot like your own post. Haha" });
+		}
 		
 		await post.save();
 		res.status(200).json(post);
