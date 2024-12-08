@@ -20,7 +20,7 @@ const protect = (req, res, next) => {
       console.log("Decoded Token:", decoded); // Debugging
 
       // Attach user ID to request
-      req.user = decoded.id;
+      req.user = { id: decoded.id };
 
       next(); // Proceed to next middleware or route handler
     } catch (error) {
