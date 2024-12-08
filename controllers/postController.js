@@ -52,6 +52,12 @@ const interactWithPost = async (req, res) => {
 		const post = await Post.findById(id);
 		if (!post) return res.status(404).json({ message: "Post not found" });
 		
+		const now = new Date();
+		if (post.expirationTime < now) {
+			post.status = "Expired";
+			await post.save();
+		}
+		
 		if (post.status === "Expired") {
 			return res.status(400).json({ message: "Cannot interact with an expired post" });
 		}
@@ -81,11 +87,12 @@ const interactWithPost = async (req, res) => {
 const checkPostExpiration = async (req, res) => {
 	try {
 		const { id } = req.params;
-		
 		const post = await Post.findById(id);
+		
 		if (!post) return res.status(404).json({ message: "Post not found" });
 		
-		if (new Date() > new Date(post.expirationTime)) {
+		const now = new Date();
+		if (post.expirationTime < now && post.status === "Live") {
 			post.status = "Expired";
 			await post.save();
 		}
@@ -95,4 +102,5 @@ const checkPostExpiration = async (req, res) => {
 		res.status(500).json({ message: error.message });
 	}
 };
+
 module.exports = { createPost, getPosts, interactWithPost, checkPostExpiration };
