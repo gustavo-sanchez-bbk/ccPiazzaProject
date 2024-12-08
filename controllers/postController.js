@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
 			topics,
 			body,
 			expirationTime,
-			owner: req.user, // Associated with the authenticated user
+			owner: req.user.id, // Associated with the authenticated user
 		});
 		
 		res.status(201).json(post);
@@ -25,7 +25,17 @@ const createPost = async (req, res) => {
 // Get ALL the posts 
 const getPosts = async (req, res) => {
 	try {
-		const posts = await Post.find().populate("owner", "username"); 
+		const { topic } = req.query; // Get the topic filter from query parameters
+		let query = {};
+		
+		if (topic) {
+			query.topics = topic; // Filter posts by topic
+		}
+		
+		const posts = await Post.find(query)
+		.populate('owner', 'username') // Populate owner's username
+		.select('-__v'); // Exclude unnecessary fields
+		
 		res.status(200).json(posts);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
