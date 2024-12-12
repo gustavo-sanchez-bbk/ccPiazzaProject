@@ -32,3 +32,5 @@ app.listen(PORT, () => {
 });
 
 // Start this app with node server.js in our Terminal Window !
+
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/gustavo-sanchez-bbk/cc-piazza:latest . --push
