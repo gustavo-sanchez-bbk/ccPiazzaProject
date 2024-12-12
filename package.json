@@ -1,0 +1,23 @@
+{
+  "name": "ccpiazzaproject",
+  "version": "1.0.0",
+  "description": "This is the Cloud Computing Concepts Project - Piazza, using a RESTful API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["cloud-computing", "piazza", "restful-api", "nodejs", "express"],
+  "author": "Gustavo Sanchez Rosales",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.4",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "bcrypt": "^5.1.0"
+  },
+  "directories": {
+    "test": "tests"
+  }
+}
